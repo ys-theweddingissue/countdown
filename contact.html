@@ -1,1 +1,129 @@
-# faaf
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message | Wedding Special</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f9f7f2;
+            --text-color: #4a4238;
+            --accent-color: #a68b6d;
+            --font-en: 'Lato', sans-serif;
+            --font-jp: 'Noto Serif JP', serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            color: var(--text-color);
+            font-family: var(--font-jp);
+            line-height: 2;
+        }
+
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 30px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+        }
+        .logo { font-family: var(--font-en); font-size: 1.2rem; letter-spacing: 0.2em; text-transform: uppercase; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-family: var(--font-en); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+        .hero-message {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .en-title {
+            font-family: var(--font-en);
+            font-size: 5rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: 0.1em;
+        }
+
+        .jp-text {
+            max-width: 600px;
+            font-size: 1.1rem;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid var(--text-color);
+            text-decoration: none;
+            color: var(--text-color);
+            font-family: var(--font-en);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: 0.4s;
+        }
+        .btn:hover {
+            background-color: var(--text-color);
+            color: var(--white, #fff);
+        }
+
+        .footer-note {
+            margin-top: 100px;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: #999;
+        }
+
+        .fade-in { opacity: 0; transform: translateY(20px); transition: 1.5s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .en-title { font-size: 3rem; }
+            .jp-text { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">K & M</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="story.html">Story</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="memories.html">Memories</a></li>
+            <li><a href="message.html">Message</a></li>
+        </ul>
+    </nav>
+
+    <main class="hero-message">
+        <h1 class="en-title fade-in">Thank You</h1>
+        <div class="jp-text fade-in">
+            <p>本日はご多忙の折、私たちの結婚式にご列席いただき、<br>誠にありがとうございます。</p>
+            <p>皆様の支えがあって、私たちは今日という日を迎えることができました。</p>
+            <p>未熟な二人ではございますが、これからも変わらぬご指導、<br>ご鞭撻のほどよろしくお願い申し上げます。</p>
+        </div>
+        
+        <div class="fade-in">
+            <a href="index.html" class="btn">Back to Home</a>
+        </div>
+
+        <p class="footer-note fade-in">2025.10.24 — Kenta & Misaki</p>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
