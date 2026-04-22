@@ -3,115 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME | K & M Wedding</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <title>Special Event | Coming Soon</title>
+
+    <!-- Google Fonts: Lato と Noto Sans JP を適用 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+   
+
+
     <style>
+        /* =========================================
+           SETTINGS & RESET
+           ========================================= */
         :root {
-            --bg-color: #f9f7f2;
-            --text-color: #4a4238;
-            --accent-color: #a68b6d;
-            --white: #ffffff;
-            --font-en: 'Lato', sans-serif;
-            --font-jp: 'Noto Serif JP', serif;
+            --bg-main: #fcfaf7; 
+            --accent-wood: #8C9A8E;
+            --glass-bg: #FAF8F5;  
+            --glass-border: rgba(255, 255, 255, 0.9);
+            --text-main: #8C9A8E;; 
+            --text-sub: #8C9A8E;
+            --font-family: 'lato', 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        :root {
+            --color-bg: #FAF8F5;       /* 温かみのある背景色 */
+            --color-text: #4A4238;     /* ダークブラウンのテキスト */
+            --color-accent: #8C9A8E;   /* セージグリーン（差し色） */
+            --color-border: #D3CBB8;   /* ライトブラウン（装飾枠） */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body {
-            background-color: var(--bg-color);
-            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
-            color: var(--text-color);
-            font-family: var(--font-jp);
-            overflow-x: hidden;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* --- Navigation --- */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 25px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 2000;
-        }
-        .menu-trigger {
-            font-family: var(--font-en); font-size: 1.1rem; letter-spacing: 0.2em;
-            cursor: pointer; background: none; border: none; color: var(--text-color);
-            display: flex; align-items: center; gap: 10px;
-        }
-        .menu-icon { width: 24px; height: 14px; position: relative; }
-        .menu-icon span { position: absolute; width: 100%; height: 1px; background: var(--text-color); left: 0; transition: 0.3s; }
-        .menu-icon span:nth-child(1) { top: 0; }
-        .menu-icon span:nth-child(2) { bottom: 0; }
-
-        .menu-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-color); z-index: 3000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden; transition: 0.5s;
-        }
-        .menu-overlay.active { opacity: 1; visibility: visible; }
-        .nav-list { list-style: none; text-align: center; }
-        .nav-list li { margin: 25px 0; }
-        .nav-list a {
-            text-decoration: none; color: var(--text-color); font-family: var(--font-en);
-            font-size: 1.4rem; letter-spacing: 0.1em; display: block;
-        }
-        .nav-list span { display: block; font-size: 0.6rem; font-family: var(--font-jp); color: var(--accent-color); margin-top: 4px; }
-
-        /* --- Home Specific --- */
-        .hero {
+        body, html {
+            width: 100%;
             height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            position: relative; text-align: center; padding: 0 20px;
+            overflow: hidden;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
         }
-        .hero-img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; filter: grayscale(100%) brightness(0.7);
+
+        /* =========================================
+           BACKGROUND
+           ========================================= */
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
+            background: radial-gradient(circle at 15% 15%, #fff5e6 0%, transparent 40%),
+                        radial-gradient(circle at 85% 85%, #efebe9 0%, transparent 40%),
+                        linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            animation: pulse 15s infinite alternate ease-in-out;
         }
-        .hero-content { color: var(--white); }
-        .hero-en { font-family: var(--font-en); font-size: 3.5rem; font-weight: 300; letter-spacing: 0.1em; margin-bottom: 10px; }
-        .hero-jp { font-size: 0.8rem; letter-spacing: 0.4em; margin-bottom: 30px; }
-        .hero-date { font-family: var(--font-en); font-size: 1.1rem; letter-spacing: 0.2em; border-top: 1px solid rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.5); padding: 10px 20px; display: inline-block; }
 
-        .scroll-hint {
-            position: absolute; bottom: 30px; color: var(--white);
-            font-size: 0.7rem; font-family: var(--font-en); letter-spacing: 0.3em;
-            writing-mode: vertical-rl; animation: bounce 2s infinite;
+        @keyframes pulse {
+            from { opacity: 0.8; }
+            to { opacity: 1; }
         }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
 
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3BaseFilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* =========================================
+           MAIN CONTAINER
+           ========================================= */
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 850px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 60px 40px;
+            box-shadow: 0 40px 80px rgba(141, 110, 99, 0.12);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .container.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           HERO SECTION (Refined Design)
+           ========================================= */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 21 / 9;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 45px;
+            background: #222;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 12s ease-out, opacity 1s ease-in-out;
+            opacity: 0.9; /* 写真を少し透過 */
+        }
+
+        .container.loaded .hero-image {
+            transform: scale(1.08);
+        }
+
+        /* 洗練されたオーバーレイ演出 */
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* 下から上へのグラデーションで深みと文字の際立ちを作る */
+            background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .large-status {
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 500;
+            letter-spacing: 0.4em;
+            color: #fff;
+            text-transform: uppercase;
+            /* 複数レイヤーのシャドウで視認性を極限まで高める */
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+
+        /* =========================================
+           COUNTDOWN & UI
+           ========================================= */
+        .countdown-wrap {
+            display: flex;
+            justify-content: center;
+            gap: clamp(10px, 4vw, 35px);
+            margin-bottom: 30px;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .countdown-item {
+            min-width: 90px;
+        }
+
+        .count-num {
+            display: block;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 200;
+            color: var(--accent-wood);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .count-label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--text-sub);
+            margin-top: 10px;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        /* =========================================
+           INTERACTIVE AREA
+           ========================================= */
+        .interactive-area {
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-container {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn-container.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hint-text {
+            font-size: 14px;
+            color: var(--text-sub);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            opacity: 1;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 0.8; transform: translateY(-3px); }
+        }
+
+        .action-btn {
+            display: inline-block;
+            padding: 20px 40px;
+            background: var(--accent-wood);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.8em;
+            box-shadow: 0 10px 30px rgba(141, 110, 99, 0.25);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(141, 110, 99, 0.35);
+            background: #7d5e53;
+        }
+
+        /* Footer */
+        .footer-text {
+            margin-top: 40px;
+            font-size: 12px;
+            color: var(--text-sub);
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px; width: 92%; }
+            .hero-section { aspect-ratio: 4 / 3; }
+            .countdown-item { min-width: 65px; }
+            .count-num { font-size: 32px; }
+        }
     </style>
 </head>
 <body>
-    <nav>
-        <button class="menu-trigger" onclick="toggleMenu()">
-            <div class="menu-icon"><span></span><span></span></div>
-            <span>K & M</span>
-        </button>
-    </nav>
 
-    <div class="menu-overlay" id="menuOverlay">
-        <div style="position:absolute; top:25px; left:25px; cursor:pointer;" onclick="toggleMenu()">CLOSE —</div>
-        <ul class="nav-list">
-            <li><a href="index.html">HOME<span>ホーム</span></a></li>
-            <li><a href="prologue.html">PROLOGUE<span>感謝の気持ち</span></a></li>
-            <li><a href="profile.html">PROFILE<span>新郎新婦紹介</span></a></li>
-            <li><a href="story.html">OUR STORY<span>二人の歩み</span></a></li>
-            <li><a href="seating.html">SEATING GUIDE<span>お席案内</span></a></li>
-            <li><a href="cuisine.html">CUISINE<span>お料理</span></a></li>
-            <li><a href="memories.html">SPECIAL MEMORIES<span>あなたへの手紙</span></a></li>
-        </ul>
-    </div>
+    <div class="ambient-bg"></div>
+    <div class="noise"></div>
 
-    <main class="hero">
-        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=1200" alt="Home Background" class="hero-img">
-        <div class="hero-content">
-            <h1 class="hero-en">The Wedding</h1>
-            <p class="hero-jp">二人の新しい門出</p>
-            <div class="hero-date">2025.10.24</div>
+    <main class="container" id="main-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <img id="hero-img" src="" alt="Event Scene" class="hero-image">
+            <div class="hero-overlay">
+                <div class="large-status" id="hero-status">LOADING</div>
+            </div>
         </div>
-        <div class="scroll-hint">SCROLL</div>
+
+        <!-- Countdown -->
+        <div class="countdown-wrap" id="countdown-area">
+            <div class="countdown-item">
+                <span class="count-num" id="days">00</span>
+                <span class="count-label">DAYS</span>
+            </div>
+            <div class="countdown-item">
+                <span class="count-num" id="hours">00</span>
+                <span class="count-label">HOURS</span>
+            </div>
+            <div class="countdown-item">
+                <span class="count-num" id="mins">00</span>
+                <span class="count-label">MINUTES</span>
+            </div>
+            <div class="countdown-item">
+                <span class="count-num" id="secs">00</span>
+                <span class="count-label">SECONDS</span>
+            </div>
+        </div>
+
+        <!-- Interactive Area -->
+        <div class="interactive-area">
+            <div id="hint-area" class="hint-text">
+                ウェブサイトを公開予定です。<br>
+                当日を迎える3日前まで、<br>
+                もうしばらくお待ちください。
+            </div>
+            <div class="btn-container" id="btn-container">
+                <a href="https://www.apple.com/jp/" class="action-btn" target="_blank" rel="noopener noreferrer">
+                    ENTER
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-text" id="footer-info">
+            Launch Date: 2026.09.12
+        </div>
     </main>
 
     <script>
-        function toggleMenu() { document.getElementById('menuOverlay').classList.toggle('active'); }
+        /**
+         * CONFIGURATION
+         */
+        const CONFIG = {
+            targetDate: "2026-09-12T18:00:00+09:00", 
+            justDaysThreshold: 150, 
+            linkUrl: "https://www.apple.com/jp/",
+            
+            // --- DEBUG MODE ---
+            // 'PRE', 'JUST', 'POST' を入れることで各状態を強制表示
+            debugStatus: null, 
+            
+            images: {
+                pre: "https://res.cloudinary.com/dmfyysmqy/image/upload/v1776854510/countdown01.jpg",
+                just: "https://res.cloudinary.com/dmfyysmqy/image/upload/v1776854510/countdown02.jpg", 
+                post: "https://res.cloudinary.com/dmfyysmqy/image/upload/v1776854510/countdown03.jpg"
+            },
+            labels: {
+                pre: "Coming Soon",
+                just: "Launching",
+                post: " Welcome"
+            }
+        };
+
+        const STATUS_PRE = 'PRE';
+        const STATUS_JUST = 'JUST';
+        const STATUS_POST = 'POST';
+
+        const elContainer = document.getElementById('main-container');
+        const elHeroImg = document.getElementById('hero-img');
+        const elHeroStatus = document.getElementById('hero-status');
+        const elCountdown = document.getElementById('countdown-area');
+        const elBtnContainer = document.getElementById('btn-container');
+        const elHintArea = document.getElementById('hint-area');
+        
+        const timerParts = {
+            d: document.getElementById('days'),
+            h: document.getElementById('hours'),
+            m: document.getElementById('mins'),
+            s: document.getElementById('secs')
+        };
+
+        let currentStatus = null;
+
+        function update() {
+            const now = new Date();
+            const target = new Date(CONFIG.targetDate);
+            const diff = target - now;
+            const diffDays = diff / (1000 * 60 * 60 * 24);
+
+            let newStatus;
+            
+            // DEBUG MODEの修正: debugStatusがある場合はそれを最優先。
+            if (CONFIG.debugStatus && [STATUS_PRE, STATUS_JUST, STATUS_POST].includes(CONFIG.debugStatus)) {
+                newStatus = CONFIG.debugStatus;
+            } else if (diff <= 0) {
+                newStatus = STATUS_POST;
+            } else if (diffDays <= CONFIG.justDaysThreshold) {
+                newStatus = STATUS_JUST;
+            } else {
+                newStatus = STATUS_PRE;
+            }
+
+            // ステータスが切り替わった時のみUIを更新
+            if (currentStatus !== newStatus) {
+                applyStatusUI(newStatus);
+                currentStatus = newStatus;
+            }
+
+            // カウントダウンの更新
+            if (newStatus !== STATUS_POST) {
+                const d = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+                const h = Math.max(0, Math.floor((diff / (1000 * 60 * 60)) % 24));
+                const m = Math.max(0, Math.floor((diff / (1000 * 60)) % 60));
+                const s = Math.max(0, Math.floor((diff / 1000) % 60));
+
+                timerParts.d.innerText = String(d).padStart(2, '0');
+                timerParts.h.innerText = String(h).padStart(2, '0');
+                timerParts.m.innerText = String(m).padStart(2, '0');
+                timerParts.s.innerText = String(s).padStart(2, '0');
+            }
+        }
+
+        function applyStatusUI(status) {
+            // 画像とラベルをセット
+            const imgKey = status.toLowerCase();
+            elHeroImg.src = CONFIG.images[imgKey];
+            elHeroStatus.innerText = CONFIG.labels[imgKey];
+
+            // 各要素の表示制御
+            if (status === STATUS_PRE) {
+                elCountdown.style.display = 'flex';
+                elCountdown.style.opacity = '1';
+                elBtnContainer.classList.remove('show');
+                elHintArea.style.display = 'block';
+            } 
+            else if (status === STATUS_JUST) {
+                elCountdown.style.display = 'flex';
+                elCountdown.style.opacity = '1';
+                elBtnContainer.classList.add('show');
+                elHintArea.style.display = 'none';
+            } 
+            else if (status === STATUS_POST) {
+                elCountdown.style.opacity = '0';
+                setTimeout(() => { 
+                    if(currentStatus === STATUS_POST) elCountdown.style.display = 'none'; 
+                }, 500);
+                elBtnContainer.classList.add('show');
+                elHintArea.style.display = 'none';
+            }
+        }
+
+        window.onload = () => {
+            update();
+            setInterval(update, 1000);
+
+            setTimeout(() => {
+                elContainer.classList.add('loaded');
+            }, 300);
+        };
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX - window.innerWidth / 2) / 100;
+            const y = (e.clientY - window.innerHeight / 2) / 100;
+            elContainer.style.transform = `translate(${x}px, ${y}px)`;
+        });
     </script>
 </body>
 </html>
